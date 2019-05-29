@@ -11,7 +11,7 @@ dataset = pd.read_csv("EOD-MSFT.csv")
 dataset = dataset.reindex(index = dataset.index[::-1])
 # print(dataset.head())
 # print(dataset.tail())
-df = dataset.iloc[ : ,[4,5,11,12]].values
+df = dataset.iloc[ : ,4:5].values
 print(df.shape)
 
 #Feature Scaling
@@ -59,20 +59,21 @@ model.compile(optimizer='adam' , loss='mean_squared_error')
 print(x_train.shape)
 model.fit(x_train , y_train , batch_size=30 , epochs=100)
 
-#Predicting results
+# #Predicting results
 total_dataset = np.concatenate((df_transformed_train , df_transformed_test) , axis=0)
-inputs = total_dataset[len(total_dataset) - len(df_transformed_train) - 30]
+inputs = total_dataset[len(total_dataset) - len(df_transformed_train) - 30:]
 inputs = inputs.reshape(-1,1)
-inputs = sc.transform(inputs)
+# inputs = sc.transform(inputs) #double Transforming avoided
 
 x_test = []
 for i in range(30 , len(inputs)):
-    x_test.append(inputs[i-30:1 , 1])
+    x_test.append(inputs[i-30:i , 0])
 x_test = np.array(x_test)
 
 x_test = np.reshape(x_test , (x_test.shape[0] ,x_test.shape[1] , 1))
 pred_values = model.predict(x_test)
 pred_values = sc.inverse_transform(pred_values)
+print(pred_values)
 
 #Visualizing results
 plt.plot(dataset.iloc[: , 4:5].values , color='black' , label = 'Original')
