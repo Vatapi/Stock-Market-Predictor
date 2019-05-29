@@ -153,14 +153,14 @@ def arima_fit(dataframe , title ,p , q):
     # print(model.summary())
 
     predictions_Arima_diff = pd.Series(results_ARIMA.fittedvalues , copy=True)
-    # print(predictions_Arima_diff.head())
+    print(predictions_Arima_diff.head())
 
     predictions_Arima_diff_cumsum = predictions_Arima_diff.cumsum()
-    # print(predictions_Arima_diff_cumsum.head(10))
+    print(predictions_Arima_diff_cumsum.head(10))
 
     predictions_Arima_log = pd.Series(log_df.iloc[1] , index=log_df.index)
     predictions_Arima_log = predictions_Arima_log.add(predictions_Arima_diff_cumsum , fill_value= 0)
-    # print(predictions_Arima_log.head(10))
+    print(predictions_Arima_log.head(10))
 
     predictions_ARIMA = np.exp(predictions_Arima_log)
     # print(predictions_ARIMA)
