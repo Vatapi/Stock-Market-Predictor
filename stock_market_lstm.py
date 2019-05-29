@@ -77,8 +77,8 @@ pred_values = np.concatenate((sc.inverse_transform(df_transformed_train) , pred_
 print(pred_values)
 
 #Visualizing results
-plt.plot(dataset.iloc[: , 4:5].values , color='black' , label = 'Original')
 plt.plot(pred_values , color='red' , label = 'Predicted')
+plt.plot(dataset.iloc[: , 4:5].values , color='black' , label = 'Original')
 plt.legend(loc='best')
 plt.title('Predicted vs Original')
 plt.show()
