@@ -55,7 +55,7 @@ model.add(Dropout(0.2))
 model.add(Flatten())
 model.add(Dense(units=1))
 
-model.compile(optimizer='adam' , loss='mean_squared_error')
+model.compile(optimizer='adam' , loss='mean_squared_error' , metrics=['accuracy'])
 print(x_train.shape)
 model.fit(x_train , y_train , batch_size=30 , epochs=100)
 
