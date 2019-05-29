@@ -61,7 +61,7 @@ model.fit(x_train , y_train , batch_size=30 , epochs=100)
 
 # #Predicting results
 total_dataset = np.concatenate((df_transformed_train , df_transformed_test) , axis=0)
-inputs = total_dataset[len(total_dataset) - len(df_transformed_train) - 30:]
+inputs = total_dataset[len(total_dataset) - len(df_transformed_test) - 30:]
 inputs = inputs.reshape(-1,1)
 # inputs = sc.transform(inputs) #double Transforming avoided
 
@@ -73,6 +73,7 @@ x_test = np.array(x_test)
 x_test = np.reshape(x_test , (x_test.shape[0] ,x_test.shape[1] , 1))
 pred_values = model.predict(x_test)
 pred_values = sc.inverse_transform(pred_values)
+pred_values = np.concatenate((sc.inverse_transform(df_transformed_train) , pred_values))
 print(pred_values)
 
 #Visualizing results
