@@ -176,6 +176,6 @@ def arima_fit(dataframe , title ,p , q):
     results_ARIMA.plot_predict('2014' , '2019')
     plt.show()
 
-# arima_fit(new_df , "new_df" , 8 , 2)
-# arima_fit(new_df1 , "new_df1" , 12 , 3)
+arima_fit(new_df , "new_df" , 8 , 2)
+arima_fit(new_df1 , "new_df1" , 8 , 3)
 arima_fit(new_df2 , 'new_df2', 4, 4)
